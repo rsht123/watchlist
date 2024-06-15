@@ -26,6 +26,7 @@ const Application: React.FC = () => {
       label: 'Logout',
       onClick: () => {
         dispatch(signout(null));
+        window.location.reload();
       },
     },
   ];

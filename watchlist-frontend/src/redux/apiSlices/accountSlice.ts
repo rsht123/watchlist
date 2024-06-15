@@ -46,6 +46,25 @@ export const accountSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    createList: builder.mutation<void, { name: string; desc: string }>({
+      query: ({ name, desc }) => ({
+        url: `/account/lists/create`,
+        method: 'post',
+        body: {
+          name,
+          desc,
+        },
+      }),
+    }),
+    deleteList: builder.mutation({
+      query: (listId: number) => ({
+        url: '/account/lists/delete',
+        method: 'delete',
+        params: {
+          listId,
+        },
+      }),
+    }),
   }),
 });
 
@@ -54,4 +73,6 @@ export const {
   useLazyFetchFavoritesQuery,
   useFetchAccountListsQuery,
   useFetchListQuery,
+  useCreateListMutation,
+  useDeleteListMutation,
 } = accountSlice;

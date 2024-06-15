@@ -51,7 +51,7 @@ const CastInfoNew = ({
               {credits.cast?.map((cast, index) => {
                 const curr_media_type =
                   media_type === MediaTypesEnum.PERSON
-                    ? MediaTypesEnum.MOVIE
+                    ? cast.media_type
                     : media_type;
                 console.log({ cast_media_type: curr_media_type });
                 const credit = {
@@ -99,7 +99,7 @@ const CastInfoNew = ({
               {credits.crew?.map((crew, index) => {
                 const curr_media_type =
                   media_type === MediaTypesEnum.PERSON
-                    ? MediaTypesEnum.MOVIE
+                    ? crew.media_type
                     : media_type;
                 // const curr_media_type = media_type;
                 const credit = {

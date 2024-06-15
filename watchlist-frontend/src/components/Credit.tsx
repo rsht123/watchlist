@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Card } from 'antd';
 import { CreditType, CreditTypesEnum } from '../interfaces/Credits';
 import { appConfig } from '../appConfig';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MediaTypesEnum } from '../interfaces';
 import ImageComponent from './ImageComponent';
 
@@ -21,6 +21,7 @@ const Credit: FC<{
     | MediaTypesEnum.PERSON;
 }> = ({ credit, media_type, media_type_nav }) => {
   const navigate = useNavigate();
+  const params = useParams();
 
   const getAdditionalInfo = () => {
     if (credit.credit_type === CreditTypesEnum.CAST) {
@@ -44,6 +45,8 @@ const Credit: FC<{
     }
     return 'N/A';
   };
+
+  console.log({ params });
 
   const handleNavigation = (context: boolean) => {
     const type = context
@@ -149,7 +152,10 @@ const Credit: FC<{
       <ImageComponent
         size={appConfig.profileImageSize}
         path={
-          credit.media_type === MediaTypesEnum.PERSON
+          params.person_id
+            ? // @ts-ignore
+              credit.poster_path
+            : credit.media_type === MediaTypesEnum.PERSON
             ? credit.poster_path
             : credit.profile_path
         }

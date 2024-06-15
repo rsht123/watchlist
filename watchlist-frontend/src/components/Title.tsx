@@ -10,11 +10,13 @@ const Title = ({
   titleId,
   handleMovieClick,
   handleSeasonClick,
+  handleDeleteList,
 }: {
   data: Media;
   titleId?: number;
   handleMovieClick?: (media_id: number) => void;
   handleSeasonClick?: (season_number: number) => void;
+  handleDeleteList?: (media_id: number) => void;
 }) => {
   const navigate = useNavigate();
 
@@ -117,6 +119,13 @@ const Title = ({
       }}
       bordered={false}
       onClick={handleNavigation}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (handleDeleteList) {
+          handleDeleteList(Number(data.id));
+        }
+      }}
     >
       <ImageComponent
         size="original"

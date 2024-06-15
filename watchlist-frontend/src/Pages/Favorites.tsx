@@ -19,6 +19,7 @@ const { Option } = Select;
 
 const Favorites = () => {
   const { favorite } = useAppSelector((state) => state.state);
+  const { user } = useAppSelector((state) => state.user);
   const [type, setType] = useState<MediaTypes>(favorite.type as MediaTypes);
   const [pagination, setPagination] = useState<PaginationProps>(
     favorite.pagination
@@ -37,7 +38,9 @@ const Favorites = () => {
       }).unwrap();
     } catch (err: any) {
       console.log('error', err);
-      message.error(err.data.message);
+      if (user?.tokenV4) {
+        message.error(err.data.message);
+      }
     }
   };
 
@@ -74,6 +77,14 @@ const Favorites = () => {
       dispatch(saveFavoriteOptions({ type, pagination }));
     };
   }, [type, pagination]);
+
+  if (!user?.tokenV4) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        Please login through tmdb in the profile to access this feature.
+      </div>
+    );
+  }
 
   return (
     <Row>
