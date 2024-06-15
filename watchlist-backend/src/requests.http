@@ -1,0 +1,17 @@
+### Sign Up User
+POST http://localhost:5000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "rishit@gmail.com",
+  "password": "Test@123"
+}
+
+### Sign In User
+POST http://localhost:5000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "rishit@gmail.com",
+  "password": "Test@123"
+}

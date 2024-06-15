@@ -1,0 +1,31 @@
+### Fetch All Users
+GET http://localhost:5000/auth
+
+
+### Sign in User
+POST http://localhost:5000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "rishitrathod@gmail.com",
+  "password": "Bravo321"
+}
+
+
+### Sign up user
+POST http://localhost:5000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "rsht@gmail.com",
+  "password": "Bravo321"
+}
+
+### Get User From Token
+GET http://localhost:5000/auth/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGY4NzI3NmQ3NWVhMzU0MDkxYTA4YzUiLCJpYXQiOjE2OTQwMDM4MzAsImV4cCI6MTY5NDA5MDIzMH0.EqiUdEB0N839OUiLPct3Nsj7BJxLLXBfA98iYE7_SX4
+
+
+### GET Watchlist
+GET http://localhost:5000/auth/watchlist/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGY4NzI3NmQ3NWVhMzU0MDkxYTA4YzUiLCJpYXQiOjE2OTQwMDM4MzAsImV4cCI6MTY5NDA5MDIzMH0.EqiUdEB0N839OUiLPct3Nsj7BJxLLXBfA98iYE7_SX4
