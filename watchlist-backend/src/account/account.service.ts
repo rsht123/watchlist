@@ -102,4 +102,52 @@ export class AccountService {
       throw new InternalServerErrorException('Error');
     }
   }
+
+  async createList(userId: string, name: string, desc: string) {
+    const headerValue = await this.usersService.getAuthHeader(userId);
+    const token = await this.usersService.getAuthTokenV4(userId);
+    if (!token) {
+      throw new BadRequestException('Token invalid');
+    }
+    try {
+      const { data } = await this.httpService.axiosRef.post(
+        '4/list',
+        {
+          name,
+          desc,
+          iso_3166_1: 'US',
+          iso_639_1: 'en',
+          public: false,
+        },
+        {
+          headers: {
+            Authorization: headerValue,
+          },
+        },
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+      throw new InternalServerErrorException('Error');
+    }
+  }
+
+  async deleteList(userId: string, listId: string) {
+    const headerValue = await this.usersService.getAuthHeader(userId);
+
+    console.log({ headerValue, userId, listId });
+    try {
+      const { data } = await this.httpService.axiosRef.delete(`4/${listId}`, {
+        headers: {
+          Authorization: headerValue,
+        },
+      });
+      console.log(data);
+
+      return data;
+    } catch (err) {
+      console.log(err);
+      throw new InternalServerErrorException('Error');
+    }
+  }
 }

@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
 
@@ -37,5 +45,23 @@ export class AccountController {
   ) {
     console.log({ userId, listId, page });
     return this.accountService.fetchListDetails(listId, userId, page);
+  }
+
+  @Post('/lists/create')
+  createUserList(
+    @CurrentUser() userId: string,
+    @Body('name') name: string,
+    @Body('desc') desc: string,
+  ) {
+    return this.accountService.createList(userId, name, desc);
+  }
+
+  @Delete('/lists/delete')
+  deleteUserList(
+    @CurrentUser() userId: string,
+    @Query('listId') listId: string,
+  ) {
+    console.log({ userId, listId });
+    return this.accountService.deleteList(userId, listId);
   }
 }
